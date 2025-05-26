@@ -1,0 +1,395 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+---
+# LICENSE
+MIT License
+
+Copyright (c) 2024 [Your Name]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+# .gitignore
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules (if you add any)
+node_modules/
+npm-debug.log
+
+# Temporary files
+.tmp/
+.temp/
+
+---
+# SECURITY.md
+# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.0.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+We take security seriously. If you discover a security vulnerability, please follow these steps:
+
+### 🔒 Private Disclosure
+- **DO NOT** open a public GitHub issue
+- Email: security@yourname.com
+- Include detailed information about the vulnerability
+- Provide steps to reproduce if possible
+
+### 📋 What to Include
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact assessment
+- Suggested fix (if you have one)
+
+### ⏱️ Response Timeline
+- **24 hours**: Acknowledgment of your report
+- **72 hours**: Initial assessment and response
+- **7 days**: Status update and timeline for fix
+- **30 days**: Resolution or detailed status update
+
+### 🏆 Recognition
+- Security researchers will be credited (with permission)
+- Hall of fame for responsible disclosure
+- Potential bounty for significant findings
+
+## Security Measures
+
+### Current Protections
+- Client-side only processing
+- No data persistence
+- K-anonymity for API calls
+- Input validation and sanitization
+- HTTPS-only in production
+
+### Best Practices
+- Regular security reviews
+- Dependency scanning
+- Code quality checks
+- Performance monitoring
+
+## Threat Model
+
+### In Scope
+- Client-side vulnerabilities
+- API security issues
+- Privacy concerns
+- Data leakage risks
+
+### Out of Scope
+- Third-party service vulnerabilities
+- Browser-specific bugs
+- Social engineering attacks
+- Physical security
+
+---
+# CONTRIBUTING.md
+# Contributing to Password Strength Checker
+
+First off, thank you for considering contributing! 🎉
+
+## 📋 Table of Contents
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Process](#development-process)
+- [Coding Standards](#coding-standards)
+- [Testing Guidelines](#testing-guidelines)
+- [Submitting Changes](#submitting-changes)
+
+## Code of Conduct
+
+This project adheres to a code of conduct. By participating, you agree to uphold this code.
+
+### Our Standards
+- **Be respectful**: Treat everyone with respect and kindness
+- **Be inclusive**: Welcome newcomers and diverse perspectives
+- **Be collaborative**: Work together constructively
+- **Be patient**: Help others learn and grow
+
+## Getting Started
+
+### 🔧 Development Setup
+```bash
+# Clone your fork
+git clone https://github.com/yourusername/password-strength-checker.git
+cd password-strength-checker
+
+# Create a feature branch
+git checkout -b feature/your-feature-name
+
+# Start local server
+python -m http.server 8000
+# or
+npx serve .
+```
+
+### 🎯 Good First Issues
+Look for issues labeled:
+- `good first issue`
+- `beginner friendly`
+- `documentation`
+- `help wanted`
+
+## Development Process
+
+### 🌿 Branch Strategy
+- `main`: Production-ready code
+- `feature/*`: New features
+- `bugfix/*`: Bug fixes
+- `docs/*`: Documentation updates
+
+### 📝 Commit Messages
+Use [Conventional Commits](https://conventionalcommits.org/):
+```
+feat: add password generation feature
+fix: resolve CORS issue with API calls
+docs: update installation instructions
+style: improve button hover animations
+test: add unit tests for strength checker
+refactor: simplify hash calculation logic
+```
+
+### 🔄 Pull Request Process
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Update documentation
+6. Submit pull request
+
+## Coding Standards
+
+### 🎨 JavaScript Style
+```javascript
+// Use modern ES6+ features
+const checkStrength = async (password) => {
+  // Use descriptive variable names
+  const strengthCriteria = {
+    hasMinLength: password.length >= 8,
+    hasUppercase: /[A-Z]/.test(password)
+  };
+  
+  // Use template literals
+  const message = `Password strength: ${getStrengthLabel(score)}`;
+  
+  // Handle errors gracefully
+  try {
+    const result = await apiCall();
+    return result;
+  } catch (error) {
+    console.error('API call failed:', error);
+    return fallbackResult();
+  }
+};
+```
+
+### 🎨 CSS Style
+```css
+/* Use CSS custom properties */
+:root {
+  --primary-color: #667eea;
+  --border-radius: 12px;
+}
+
+/* Use meaningful class names */
+.password-strength-meter {
+  /* Group related properties */
+  display: flex;
+  align-items: center;
+  
+  /* Use consistent spacing */
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+  
+  /* Smooth transitions */
+  transition: all var(--transition-duration) ease;
+}
+```
+
+### 🌐 HTML Standards
+```html
+<!-- Use semantic HTML -->
+<main role="main">
+  <section aria-labelledby="password-section">
+    <h2 id="password-section">Password Checker</h2>
+    
+    <!-- Include accessibility attributes -->
+    <input 
+      type="password"
+      id="password-input"
+      aria-describedby="password-help"
+      autocomplete="new-password"
+    >
+    <div id="password-help">Enter password to check strength</div>
+  </section>
+</main>
+```
+
+## Testing Guidelines
+
+### 🧪 Manual Testing Checklist
+- [ ] Test in Chrome, Firefox, Safari, Edge
+- [ ] Test on mobile devices
+- [ ] Test with screen readers
+- [ ] Test keyboard navigation
+- [ ] Test with slow network connections
+- [ ] Test with JavaScript disabled
+
+### 🔍 Security Testing
+- [ ] No sensitive data in console logs
+- [ ] No passwords stored in memory longer than necessary
+- [ ] API calls use HTTPS
+- [ ] Input validation works correctly
+- [ ] XSS prevention measures in place
+
+### 📱 Responsive Testing
+- [ ] Mobile portrait (320px+)
+- [ ] Mobile landscape (568px+)
+- [ ] Tablet (768px+)
+- [ ] Desktop (1024px+)
+- [ ] Large screens (1440px+)
+
+## Submitting Changes
+
+### 📤 Pull Request Template
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Documentation update
+- [ ] Performance improvement
+- [ ] Refactoring
+
+## Testing
+- [ ] Tested manually in multiple browsers
+- [ ] Tested accessibility features
+- [ ] Tested on mobile devices
+- [ ] Added/updated tests
+
+## Screenshots
+Add screenshots for UI changes
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] No breaking changes
+```
+
+### 🎯 Review Process
+1. **Automated checks**: CI/CD pipeline runs
+2. **Code review**: Maintainer reviews code
+3. **Testing**: Changes are tested
+4. **Merge**: Approved changes are merged
+
+## Recognition
+
+### 🏆 Contributors
+All contributors are recognized in:
+- README.md contributors section
+- GitHub contributors page
+- Release notes (for significant contributions)
+
+### 🌟 Maintainer Path
+Active contributors may be invited to become maintainers:
+- Consistent quality contributions
+- Helpful in issues and discussions
+- Demonstrates good judgment
+- Aligns with project values
+
+## Questions?
+
+### 💬 Getting Help
+- **GitHub Discussions**: For general questions
+- **GitHub Issues**: For bugs and feature requests
+- **Email**: maintainer@yourname.com for sensitive topics
+
+### 📚 Resources
+- [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+- [Web Accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/)
+- [Security Best Practices](https://owasp.org/www-project-web-security-testing-guide/)
+
+---
+
+**Thank you for contributing! 🚀**
