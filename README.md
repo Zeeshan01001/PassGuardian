@@ -327,7 +327,6 @@ SOFTWARE.
 
 - **Documentation**: Check this README first
 - **Issues**: Use GitHub Issues for bugs/features
-- **Security**: Email security@yourname.com for security issues
 - **General**: Discussions tab for questions
 
 ---
