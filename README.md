@@ -59,14 +59,14 @@ A modern, privacy-focused password security tool that checks password strength l
 
 1. Fork this repository
 2. Enable GitHub Pages in repository settings
-3. Visit `https://yourusername.github.io/password-strength-checker`
+3. Visit `https://zeeshan01001.github.io/PassGuardian`
 
 ### **Option 2: Local Development**
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/password-strength-checker.git
-cd password-strength-checker
+git clone https://github.com/Zeeshan01001/PassGuardian.git
+cd PassGuardian
 
 # Serve locally (Python 3)
 python -m http.server 8000
@@ -294,7 +294,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ```
 MIT License
 
-Copyright (c) 2024 [Your Name]
+Copyright (c) 2024 Zeeshan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -327,7 +327,6 @@ SOFTWARE.
 
 - **Documentation**: Check this README first
 - **Issues**: Use GitHub Issues for bugs/features
-- **Security**: Email security@yourname.com for security issues
 - **General**: Discussions tab for questions
 
 ---
