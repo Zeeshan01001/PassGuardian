@@ -31,7 +31,7 @@ A modern, privacy-focused password security tool that checks password strength l
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://yourusername.github.io/password-strength-checker)
+[View Live Demo](https://zeeshan01001.github.io/PassGuardian)
 
 
 
